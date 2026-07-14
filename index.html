@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sushi Kai — Sushi Fresco, Hecho al Momento | Providencia, Santiago</title>
+  <meta name="description" content="Sushi Kai — Rolls, tablas y entradas preparadas al momento con ingredientes frescos. Delivery y retiro en Providencia, Santiago. Haz tu pedido por WhatsApp.">
+  <meta name="keywords" content="sushi, delivery, Providencia, Santiago, rolls, tablas, sushi fresco, pedido online, comida japonesa">
+  <meta name="author" content="Sushi Kai">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / WhatsApp preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sushi Kai — Sushi Fresco, Hecho al Momento">
+  <meta property="og:description" content="Rolls, tablas y entradas preparadas al momento. Delivery y retiro en Providencia, Santiago.">
+  <!-- REEMPLAZAR: URL de la imagen de preview (1200x630px recomendado) -->
+  <meta property="og:image" content="https://tusitio.com/img/og-image.jpg">
+  <!-- REEMPLAZAR: URL final del sitio -->
+  <meta property="og:url" content="https://tusitio.com">
+  <meta property="og:site_name" content="Sushi Kai">
+  <meta property="og:locale" content="es_CL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sushi Kai — Sushi Fresco, Hecho al Momento">
+  <meta name="twitter:description" content="Rolls, tablas y entradas preparadas al momento. Delivery y retiro en Providencia, Santiago.">
+  <!-- REEMPLAZAR: misma imagen OG -->
+  <meta name="twitter:image" content="https://tusitio.com/img/og-image.jpg">
+
+  <!-- REEMPLAZAR: favicon (puedes usar un .ico o .png de 32x32) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍣</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================
+       VARIABLES Y RESET
+       ================================================ */
+    :root {
+      --color-bg: #0f0f0f;
+      --color-bg-card: #1a1a1a;
+      --color-bg-elevated: #222222;
+      --color-text: #f0ece4;
+      --color-text-muted: #9a9590;
+      --color-accent: #c8372d;
+      --color-accent-hover: #e04438;
+      --color-gold: #d4a853;
+      --color-gold-muted: #b8923e;
+      --color-success: #4caf50;
+      --color-border: #2a2a2a;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --header-h: 72px;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--color-gold); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--color-gold-muted); }
+    button { font-family: inherit; cursor: pointer; border: none; }
+    ul { list-style: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* ================================================
+       ANIMACIONES
+       ================================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cartBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0); }
+      to { transform: translateX(100%); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================================================
+       HEADER
+       ================================================ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: rgba(15, 15, 15, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      transition: background var(--transition);
+    }
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .header__logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header__logo-accent { color: var(--color-accent); }
+    .header__nav { display: flex; gap: 32px; align-items: center; }
+    .header__nav a {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .header__nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width var(--transition);
+    }
+    .header__nav a:hover { color: var(--color-text); }
+    .header__nav a:hover::after { width: 100%; }
+    .header__cart {
+      position: relative;
+      background: none;
+      color: var(--color-text);
+      font-size: 1.4rem;
+      padding: 8px;
+      border-radius: 50%;
+      transition: background var(--transition);
+      line-height: 1;
+    }
+    .header__cart:hover { background: var(--color-bg-elevated); }
+    .header__cart-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--color-accent);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+      transition: all var(--transition);
+    }
+    .header__cart-count.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .header__cart-count.bounce {
+      animation: cartBounce 0.4s ease;
+    }
+
+    /* Mobile menu toggle */
+    .header__menu-toggle {
+      display: none;
+      background: none;
+      color: var(--color-text);
+      font-size: 1.5rem;
+      padding: 8px;
+    }
+
+    /* ================================================
+       HERO
+       ================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* REEMPLAZAR: imagen hero de fondo (sushi apetitoso, 1920x1080 mínimo)
+       Proporción: 16:9, foto cenital o angular de rolls de sushi */
+    .hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 15, 15, 0.6) 0%,
+        rgba(15, 15, 15, 0.75) 50%,
+        rgba(15, 15, 15, 0.95) 100%
+      );
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+      padding: 0 20px;
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hero__title-accent { color: var(--color-accent); }
+    .hero__tagline {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--color-text-muted);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-accent);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(200, 55, 45, 0.3);
+    }
+    .hero__cta:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200, 55, 45, 0.4);
+      color: white;
+    }
+    .hero__info {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .hero__info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .hero__info-icon {
+      font-size: 1.2rem;
+    }
+
+    /* ================================================
+       SECCIÓN GENÉRICA
+       ================================================ */
+    .section {
+      padding: 100px 0;
+    }
+    .section__header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section__subtitle {
+      color: var(--color-text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .section__line {
+      width: 60px;
+      height: 3px;
+      background: var(--color-accent);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ================================================
+       MENÚ - FILTROS/TABS
+       ================================================ */
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .menu-tabs__btn {
+      background: var(--color-bg-card);
+      color: var(--color-text-muted);
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all var(--transition);
+      border: 1px solid var(--color-border);
+    }
+    .menu-tabs__btn:hover {
+      color: var(--color-text);
+      border-color: var(--color-text-muted);
+    }
+    .menu-tabs__btn.active {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+
+    /* ================================================
+       MENÚ - GRID DE PRODUCTOS
+       ================================================ */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--color-bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-bg-elevated);
+      box-shadow: var(--shadow);
+    }
+    .product-card__img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--color-bg-elevated);
+    }
+    /* REEMPLAZAR: cada producto necesita una foto
+       Proporción: 4:3 (ej: 400x300px)
+       Formato: JPG/WebP, comprimidas para web */
+    .product-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition);
+    }
+    .product-card:hover .product-card__img img {
+      transform: scale(1.05);
+    }
+    .product-card__img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-card));
+    }
+    .product-card__body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card__name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .product-card__desc {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .product-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-card__price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+    .product-card__add {
+      background: var(--color-accent);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .product-card__add:hover {
+      background: var(--color-accent-hover);
+      transform: scale(1.1);
+    }
+    .product-card__add.added {
+      background: var(--color-success);
+    }
+
+    /* Promo badge */
+    .product-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--color-accent);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .product-card__old-price {
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin-right: 8px;
+      font-weight: 400;
+    }
+
+    /* ================================================
+       PROMOCIONES
+       ================================================ */
+    .promos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .promo-card {
+      background: linear-gradient(135deg, var(--color-bg-card), var(--color-bg-elevated));
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--color-gold-muted);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .promo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(212, 168, 83, 0.15);
+    }
+    .promo-card__img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--color-bg-elevated);
+    }
+    .promo-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .promo-card__img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      background: linear-gradient(135deg, #1a1510, #2a2015);
+    }
+    .promo-card__body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .promo-card__tag {
+      color: var(--color-gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .promo-card__name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .promo-card__desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .promo-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .promo-card__prices {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .promo-card__old-price {
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+    }
+    .promo-card__price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    /* ================================================
+       NOSOTROS
+       ================================================ */
+    .about {
+      background: var(--color-bg-card);
+    }
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about__text h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .about__text p {
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .about__features {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+    }
+    .about__feature {
+      text-align: center;
+    }
+    .about__feature-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .about__feature-text {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .about__feature-number {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+    /* REEMPLAZAR: foto del local o del chef (proporción 4:3 o 1:1) */
+    .about__img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--color-bg-elevated);
+    }
+    .about__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about__img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* ================================================
+       FOOTER / CONTACTO
+       ================================================ */
+    .footer {
+      background: var(--color-bg-card);
+      border-top: 1px solid var(--color-border);
+      padding: 80px 0 32px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer__brand {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .footer__brand-accent { color: var(--color-accent); }
+    .footer__desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .footer__social {
+      display: flex;
+      gap: 12px;
+    }
+    .footer__social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      transition: all var(--transition);
+      font-size: 1.1rem;
+    }
+    .footer__social a:hover {
+      background: var(--color-accent);
+      color: white;
+    }
+    .footer__title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .footer__info {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .footer__info li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer__info-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .footer__map {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: var(--color-bg-elevated);
+    }
+    /* REEMPLAZAR: iframe de Google Maps con las coordenadas reales del local
+       Para obtener el embed: Google Maps > Compartir > Insertar mapa > copiar iframe */
+    .footer__map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .footer__map-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+    .footer__bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 24px;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ================================================
+       CARRITO - PANEL LATERAL
+       ================================================ */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+    .cart-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 420px;
+      max-width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--color-bg);
+      z-index: 2001;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform var(--transition);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+    }
+    .cart-panel.open {
+      transform: translateX(0);
+    }
+    .cart__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+      flex-shrink: 0;
+    }
+    .cart__header h2 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+    }
+    .cart__close {
+      background: none;
+      color: var(--color-text-muted);
+      font-size: 1.5rem;
+      padding: 4px;
+      transition: color var(--transition);
+    }
+    .cart__close:hover { color: var(--color-text); }
+    .cart__items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+    }
+    .cart__empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-text-muted);
+    }
+    .cart__empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .cart__empty p { font-size: 0.95rem; }
+
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: flex-start;
+    }
+    .cart-item__info { flex: 1; }
+    .cart-item__name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .cart-item__price {
+      color: var(--color-gold);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .cart-item__controls {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 10px;
+    }
+    .cart-item__qty-btn {
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition);
+    }
+    .cart-item__qty-btn:hover { background: var(--color-border); }
+    .cart-item__qty {
+      width: 40px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .cart-item__remove {
+      background: none;
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+      padding: 4px 8px;
+      transition: color var(--transition);
+      margin-left: auto;
+    }
+    .cart-item__remove:hover { color: var(--color-accent); }
+
+    .cart__footer {
+      border-top: 1px solid var(--color-border);
+      padding: 20px 24px;
+      flex-shrink: 0;
+    }
+    .cart__summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .cart__summary-row.total {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-gold);
+    }
+    .cart__delivery-toggle {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+    }
+    .cart__delivery-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-elevated);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-align: center;
+      transition: all var(--transition);
+      border: 1px solid var(--color-border);
+    }
+    .cart__delivery-btn.active {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+    .cart__field {
+      margin-bottom: 12px;
+    }
+    .cart__field label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .cart__field input,
+    .cart__field textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color var(--transition);
+      outline: none;
+    }
+    .cart__field input:focus,
+    .cart__field textarea:focus {
+      border-color: var(--color-accent);
+    }
+    .cart__field textarea { resize: vertical; min-height: 60px; }
+    .cart__field.error input,
+    .cart__field.error textarea {
+      border-color: var(--color-accent);
+    }
+    .cart__field .error-msg {
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      margin-top: 4px;
+      display: none;
+    }
+    .cart__field.error .error-msg { display: block; }
+
+    .cart__submit {
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #25d366;
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all var(--transition);
+      margin-top: 16px;
+    }
+    .cart__submit:hover {
+      background: #20bd5a;
+      transform: translateY(-1px);
+    }
+    .cart__submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .cart__submit-icon { font-size: 1.3rem; }
+
+    /* ================================================
+       WHATSAPP FLOTANTE
+       ================================================ */
+    /* REEMPLAZAR: el número de WhatsApp está en la constante WHATSAPP_NUMBER en el JS */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      z-index: 999;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+      color: white;
+    }
+
+    /* ================================================
+       RESPONSIVE
+       ================================================ */
+    @media (max-width: 900px) {
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about__img { order: -1; }
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .promos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root { --header-h: 60px; }
+
+      .header__nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: rgba(15, 15, 15, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 24px 20px;
+        gap: 20px;
+        border-bottom: 1px solid var(--color-border);
+        transform: translateY(-110%);
+        transition: transform var(--transition);
+      }
+      .header__nav.open { transform: translateY(0); }
+      .header__menu-toggle { display: block; }
+
+      .hero__info { gap: 20px; }
+
+      .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .cart-panel { width: 100%; }
+
+      .about__features { gap: 20px; }
+
+      .section { padding: 60px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-tabs { gap: 6px; }
+      .menu-tabs__btn { padding: 8px 16px; font-size: 0.8rem; }
+      .hero__info { flex-direction: column; gap: 12px; }
+    }
+
+    /* Scrollbar sutil en el carrito */
+    .cart__items::-webkit-scrollbar { width: 4px; }
+    .cart__items::-webkit-scrollbar-track { background: transparent; }
+    .cart__items::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--color-border);
+      opacity: 0;
+      transition: all var(--transition);
+      z-index: 3000;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       HEADER
+       ============================================ -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="#" class="header__logo">
+        <span class="header__logo-accent">鯛</span> Sushi Kai
+      </a>
+      <nav class="header__nav" id="nav">
+        <a href="#menu" onclick="closeMenu()">Menú</a>
+        <a href="#promos" onclick="closeMenu()">Promociones</a>
+        <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="header__cart" onclick="toggleCart()" aria-label="Abrir carrito">
+          🛒
+          <span class="header__cart-count" id="cart-count">0</span>
+        </button>
+        <button class="header__menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú" id="menu-toggle">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <!-- REEMPLAZAR: imagen hero de fondo
+           Recomendación: foto cenital de rolls de sushi sobre fondo oscuro
+           Tamaño: 1920x1080px mínimo, formato JPG/WebP
+           Ejemplo Unsplash: buscar "sushi dark background top view" -->
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'%3E%3Crect fill='%231a1a1a' width='1920' height='1080'/%3E%3Ctext x='960' y='540' text-anchor='middle' fill='%23333' font-size='48' font-family='sans-serif'%3EHero Image 1920×1080%3C/text%3E%3C/svg%3E" alt="Sushi Kai - Sushi fresco hecho al momento" loading="eager">
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title">Sushi <span class="hero__title-accent">Kai</span></h1>
+      <p class="hero__tagline">Sushi fresco, hecho al momento</p>
+      <a href="#menu" class="hero__cta">Ver el menú →</a>
+      <div class="hero__info">
+        <div class="hero__info-item">
+          <span class="hero__info-icon">🕐</span>
+          <span>Mar a Dom · 12:00 – 22:30</span>
+        </div>
+        <div class="hero__info-item">
+          <span class="hero__info-icon">🛵</span>
+          <span>Delivery 30-45 min</span>
+        </div>
+        <div class="hero__info-item">
+          <span class="hero__info-icon">📍</span>
+          <span>Providencia, Santiago</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       MENÚ
+       ============================================ -->
+  <section class="section" id="menu">
+    <div class="container">
+      <div class="section__header fade-in-up">
+        <h2 class="section__title">Nuestro Menú</h2>
+        <p class="section__subtitle">Ingredientes premium, preparación artesanal</p>
+        <div class="section__line"></div>
+      </div>
+      <div class="menu-tabs fade-in-up" id="menu-tabs"></div>
+      <div class="menu-grid" id="menu-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROMOCIONES
+       ============================================ -->
+  <section class="section" id="promos" style="background: var(--color-bg-card);">
+    <div class="container">
+      <div class="section__header fade-in-up">
+        <h2 class="section__title">Promociones</h2>
+        <p class="section__subtitle">Combos pensados para compartir</p>
+        <div class="section__line"></div>
+      </div>
+      <div class="promos-grid" id="promos-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       NOSOTROS
+       ============================================ -->
+  <section class="section about" id="nosotros">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__text fade-in-up">
+          <h3>La tradición japonesa, <br>en tu mesa</h3>
+          <p>
+            En Sushi Kai cada pieza se prepara al momento con ingredientes frescos seleccionados a diario.
+            Nuestro salmón llega directamente de productores certificados, y el arroz se sazona con la proporción
+            exacta de vinagre de arroz, tal como la tradición lo indica.
+          </p>
+          <p>
+            Más de 8 años de experiencia nos respaldan. Ya sea que prefieras un clásico California Roll o
+            te atrevas con nuestras creaciones premium, cada bocado es un viaje a la cocina japonesa
+            con el toque fresco que nos identifica.
+          </p>
+          <div class="about__features">
+            <div class="about__feature">
+              <div class="about__feature-icon">🐟</div>
+              <div class="about__feature-number">100%</div>
+              <div class="about__feature-text">Ingredientes<br>frescos</div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon">👨‍🍳</div>
+              <div class="about__feature-number">8+</div>
+              <div class="about__feature-text">Años de<br>experiencia</div>
+            </div>
+            <div class="about__feature">
+              <div class="about__feature-icon">⭐</div>
+              <div class="about__feature-number">4.8</div>
+              <div class="about__feature-text">Valoración<br>promedio</div>
+            </div>
+          </div>
+        </div>
+        <div class="about__img fade-in-up">
+          <!-- REEMPLAZAR: foto del local o del chef preparando sushi
+               Proporción: 4:3 (ej: 600x450px)
+               Ejemplo Unsplash: buscar "sushi chef preparing" o "japanese restaurant interior" -->
+          <div class="about__img-placeholder">
+            👨‍🍳
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACTO / FOOTER
+       ============================================ -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="fade-in-up">
+          <div class="footer__brand">
+            <span class="footer__brand-accent">鯛</span> Sushi Kai
+          </div>
+          <p class="footer__desc">
+            Sushi fresco hecho al momento en Providencia. Delivery y retiro en local.
+            Haz tu pedido por WhatsApp y recíbelo en la puerta de tu casa.
+          </p>
+          <div class="footer__social">
+            <!-- REEMPLAZAR: links reales de redes sociales -->
+            <a href="https://instagram.com/sushikai" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+            <a href="https://facebook.com/sushikai" target="_blank" rel="noopener" aria-label="Facebook">👤</a>
+            <a href="https://tiktok.com/@sushikai" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+          </div>
+        </div>
+        <div class="fade-in-up">
+          <h4 class="footer__title">Contacto</h4>
+          <ul class="footer__info">
+            <li>
+              <span class="footer__info-icon">📍</span>
+              <!-- REEMPLAZAR: dirección real del local -->
+              <span>Av. Providencia 1234, Providencia, Santiago</span>
+            </li>
+            <li>
+              <span class="footer__info-icon">📞</span>
+              <!-- REEMPLAZAR: teléfono real -->
+              <span>+56 9 9422 2679</span>
+            </li>
+            <li>
+              <span class="footer__info-icon">🕐</span>
+              <span>Mar a Dom<br>12:00 – 22:30</span>
+            </li>
+            <li>
+              <span class="footer__info-icon">🛵</span>
+              <span>Delivery: Providencia, Ñuñoa, Las Condes</span>
+            </li>
+          </ul>
+        </div>
+        <div class="fade-in-up">
+          <h4 class="footer__title">Encuéntranos</h4>
+          <div class="footer__map">
+            <!-- REEMPLAZAR: insertar iframe de Google Maps aquí
+                 Instrucciones:
+                 1. Ir a Google Maps y buscar la dirección del local
+                 2. Click en "Compartir" > "Insertar un mapa"
+                 3. Copiar el <iframe> y pegarlo aquí
+                 4. Eliminar el div placeholder de abajo
+                 Ejemplo:
+                 <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen="" loading="lazy"></iframe>
+            -->
+            <div class="footer__map-placeholder">
+              <span style="font-size:2rem;">🗺️</span>
+              <span>Mapa de Google Maps</span>
+              <span style="font-size:0.8rem;">(reemplazar con iframe)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 Sushi Kai · Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CARRITO - PANEL LATERAL
+       ============================================ -->
+  <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart__header">
+      <h2>🛒 Tu pedido</h2>
+      <button class="cart__close" onclick="toggleCart()" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="cart__items" id="cart-items">
+      <div class="cart__empty" id="cart-empty">
+        <div class="cart__empty-icon">🍣</div>
+        <p>Tu carrito está vacío</p>
+        <p style="font-size:0.8rem;margin-top:8px;">Agrega productos desde el menú</p>
+      </div>
+    </div>
+    <div class="cart__footer" id="cart-footer" style="display:none;">
+      <div class="cart__summary-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">$0</span>
+      </div>
+      <div class="cart__delivery-toggle">
+        <button class="cart__delivery-btn active" data-type="delivery" onclick="setDeliveryType('delivery')">
+          🛵 Delivery ($2.500)
+        </button>
+        <button class="cart__delivery-btn" data-type="pickup" onclick="setDeliveryType('pickup')">
+          🏪 Retiro (gratis)
+        </button>
+      </div>
+      <div class="cart__summary-row" id="delivery-cost-row">
+        <span>Delivery</span>
+        <!-- REEMPLAZAR: precio del delivery si cambia -->
+        <span id="cart-delivery-cost">$2.500</span>
+      </div>
+      <div class="cart__summary-row total">
+        <span>Total</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <div class="cart__field" id="field-name">
+        <label for="client-name">Nombre *</label>
+        <input type="text" id="client-name" placeholder="Tu nombre">
+        <span class="error-msg">Ingresa tu nombre</span>
+      </div>
+      <div class="cart__field" id="field-address">
+        <label for="client-address">Dirección de entrega *</label>
+        <input type="text" id="client-address" placeholder="Calle, número, depto, comuna">
+        <span class="error-msg">Ingresa tu dirección</span>
+      </div>
+      <div class="cart__field">
+        <label for="client-comments">Comentarios (opcional)</label>
+        <textarea id="client-comments" placeholder="Sin palta, salsa extra, etc." rows="2"></textarea>
+      </div>
+      <button class="cart__submit" onclick="sendWhatsApp()" id="cart-submit">
+        <span class="cart__submit-icon">💬</span>
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- WhatsApp flotante -->
+  <!-- REEMPLAZAR: número de WhatsApp en la constante WHATSAPP_NUMBER del JS -->
+  <a href="#" class="whatsapp-float" id="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    💬
+  </a>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ================================================
+       CONFIGURACIÓN - NÚMERO DE WHATSAPP
+       ================================================
+       REEMPLAZAR: Cambia este número por el del local.
+       Formato: código de país + número, sin espacios ni signos.
+       Ejemplo Chile: 56912345678
+    */
+    const WHATSAPP_NUMBER = '56994222679';
+
+    /* ================================================
+       REEMPLAZAR: Costo del delivery en pesos chilenos.
+       Cambiar este valor si el precio del delivery es diferente.
+    */
+    const DELIVERY_COST = 2500;
+
+    /* ================================================
+       AQUÍ SE EDITA EL MENÚ
+       ================================================
+       Cada producto tiene:
+       - id: identificador único (no repetir)
+       - name: nombre del producto
+       - desc: descripción corta y apetitosa
+       - price: precio en pesos chilenos (número entero)
+       - category: categoría (debe coincidir con las que se muestran en tabs)
+       - emoji: emoji placeholder (se reemplaza cuando pongas fotos reales)
+       - img: ruta de la imagen (dejar vacío '' para usar emoji placeholder)
+
+       Para agregar una foto real, poner la ruta en "img":
+       Ejemplo: img: 'img/california-roll.jpg'
+       Proporción recomendada: 4:3 (400x300px), formato JPG o WebP
+    */
+    const MENU = [
+      // — Rolls Clásicos —
+      {
+        id: 'california-roll',
+        name: 'California Roll',
+        desc: 'Kanikama, palta y pepino envueltos en arroz con sésamo tostado. El clásico que nunca falla.',
+        price: 5900,
+        category: 'Rolls Clásicos',
+        emoji: '🥢',
+        img: '',
+        pieces: '30 piezas'
+      },
+      {
+        id: 'sake-roll',
+        name: 'Sake Roll',
+        desc: 'Salmón fresco, queso crema y palta. Suave, cremoso y con el sabor del salmón como protagonista.',
+        price: 6500,
+        category: 'Rolls Clásicos',
+        emoji: '🍣',
+        img: '',
+        pieces: '30 piezas'
+      },
+      {
+        id: 'avocado-roll',
+        name: 'Avocado Roll',
+        desc: 'Palta madura, pepino y sésamo. Fresco, liviano y perfecto para los amantes de la palta.',
+        price: 5500,
+        category: 'Rolls Clásicos',
+        emoji: '🥑',
+        img: '',
+        pieces: '30 piezas'
+      },
+
+      // — Rolls Premium —
+      {
+        id: 'tori-furai',
+        name: 'Tori Furai',
+        desc: 'Pollo apanado crocante, queso crema y cebollín, bañado en salsa teriyaki caramelizada.',
+        price: 7900,
+        category: 'Rolls Premium',
+        emoji: '🍗',
+        img: '',
+        pieces: '30 piezas'
+      },
+      {
+        id: 'ebi-panko',
+        name: 'Ebi Panko',
+        desc: 'Camarón ecuatoriano apanado en panko dorado, con palta y un toque de mayo picante.',
+        price: 8500,
+        category: 'Rolls Premium',
+        emoji: '🦐',
+        img: '',
+        pieces: '30 piezas'
+      },
+      {
+        id: 'salmon-ciruela',
+        name: 'Salmón Ciruela',
+        desc: 'Salmón flambeado con salsa de ciruela, queso crema y cebollín frito. Dulce y ahumado.',
+        price: 7500,
+        category: 'Rolls Premium',
+        emoji: '🔥',
+        img: '',
+        pieces: '30 piezas'
+      },
+
+      // — Tablas —
+      {
+        id: 'tabla-mixta-40',
+        name: 'Tabla Mixta',
+        desc: '40 piezas variadas: California, Sake Roll y rolls del día. Ideal para compartir en pareja.',
+        price: 18900,
+        category: 'Tablas',
+        emoji: '🍱',
+        img: '',
+        pieces: '40 piezas'
+      },
+      {
+        id: 'tabla-familiar-60',
+        name: 'Tabla Familiar',
+        desc: '60 piezas surtidas con rolls clásicos y premium. Para la familia completa.',
+        price: 26900,
+        category: 'Tablas',
+        emoji: '👨‍👩‍👧‍👦',
+        img: '',
+        pieces: '60 piezas'
+      },
+      {
+        id: 'tabla-premium-80',
+        name: 'Tabla Premium',
+        desc: '80 piezas de nuestra selección premium. Salmón, camarón y creaciones del chef.',
+        price: 34900,
+        category: 'Tablas',
+        emoji: '🏆',
+        img: '',
+        pieces: '80 piezas'
+      },
+
+      // — Entradas —
+      {
+        id: 'gyozas',
+        name: 'Gyozas',
+        desc: 'Empanaditas japonesas de cerdo y verduras, selladas a la plancha. Crujientes por fuera, jugosas por dentro.',
+        price: 4500,
+        category: 'Entradas',
+        emoji: '🥟',
+        img: '',
+        pieces: '6 unidades'
+      },
+      {
+        id: 'edamame',
+        name: 'Edamame',
+        desc: 'Porotos de soya al vapor con sal de mar. El aperitivo japonés por excelencia.',
+        price: 3500,
+        category: 'Entradas',
+        emoji: '🫛',
+        img: '',
+        pieces: ''
+      },
+      {
+        id: 'rangoon',
+        name: 'Rangoon',
+        desc: 'Wantán crocante relleno de queso crema y kanikama, frito hasta dorar. Adictivos.',
+        price: 4900,
+        category: 'Entradas',
+        emoji: '🔶',
+        img: '',
+        pieces: '6 unidades'
+      },
+
+      // — Bebidas —
+      {
+        id: 'bebida-lata',
+        name: 'Bebida Lata',
+        desc: 'Coca-Cola, Sprite o Fanta. Lata 350cc bien helada.',
+        price: 1500,
+        category: 'Bebidas',
+        emoji: '🥤',
+        img: '',
+        pieces: ''
+      },
+      {
+        id: 'te-helado',
+        name: 'Té Helado',
+        desc: 'Té verde japonés helado, ligeramente endulzado. Refrescante y perfecto con sushi.',
+        price: 2000,
+        category: 'Bebidas',
+        emoji: '🍵',
+        img: '',
+        pieces: ''
+      }
+    ];
+
+    /* ================================================
+       PROMOCIONES
+       ================================================
+       Misma estructura que el menú, con campos extra:
+       - oldPrice: precio original (tachado)
+       - promoTag: etiqueta de la promo
+       - items: descripción de lo que incluye
+    */
+    const PROMOS = [
+      {
+        id: 'promo-duo',
+        name: 'Combo Duo',
+        desc: '2 rolls clásicos (60 piezas) + 2 bebidas lata. Perfecto para una noche de sushi en pareja.',
+        price: 12900,
+        oldPrice: 14800,
+        promoTag: 'Más vendido',
+        emoji: '💑',
+        img: '',
+        items: '2 rolls clásicos + 2 bebidas'
+      },
+      {
+        id: 'promo-familiar',
+        name: 'Combo Familiar',
+        desc: 'Tabla Mixta 40 pzs + Gyozas + Edamame + 3 bebidas. Todo lo que la familia necesita.',
+        price: 26900,
+        oldPrice: 31400,
+        promoTag: 'Ahorra $4.500',
+        emoji: '👨‍👩‍👧‍👦',
+        img: '',
+        items: 'Tabla 40 pzs + entrada + acompañamientos'
+      },
+      {
+        id: 'promo-premium',
+        name: 'Noche Premium',
+        desc: '2 rolls premium a elección + Rangoon + 2 tés helados. Para los que quieren lo mejor.',
+        price: 21900,
+        oldPrice: 25200,
+        promoTag: 'Premium',
+        emoji: '✨',
+        img: '',
+        items: '2 rolls premium + Rangoon + 2 bebidas'
+      }
+    ];
+
+    /* ================================================
+       ESTADO DEL CARRITO (en memoria, sin localStorage)
+       ================================================ */
+    let cart = [];
+    let deliveryType = 'delivery';
+
+    /* ================================================
+       FUNCIONES DE UTILIDAD
+       ================================================ */
+    function formatPrice(n) {
+      return '$' + n.toLocaleString('es-CL');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    /* ================================================
+       RENDERIZADO DEL MENÚ
+       ================================================ */
+    function getCategories() {
+      const cats = [];
+      MENU.forEach(p => {
+        if (!cats.includes(p.category)) cats.push(p.category);
+      });
+      return cats;
+    }
+
+    let activeCategory = 'Todos';
+
+    function renderTabs() {
+      const cats = getCategories();
+      const container = document.getElementById('menu-tabs');
+      let html = '<button class="menu-tabs__btn active" onclick="filterMenu(\'Todos\')">Todos</button>';
+      cats.forEach(c => {
+        html += `<button class="menu-tabs__btn" onclick="filterMenu('${c}')">${c}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterMenu(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.menu-tabs__btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === cat);
+      });
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('menu-grid');
+      const filtered = activeCategory === 'Todos' ? MENU : MENU.filter(p => p.category === activeCategory);
+
+      container.innerHTML = filtered.map(p => `
+        <div class="product-card fade-in-up visible">
+          <div class="product-card__img">
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
+              : `<div class="product-card__img-placeholder">${p.emoji}</div>`
+            }
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__name">${p.name}</div>
+            <div class="product-card__desc">${p.pieces ? p.pieces + ' · ' : ''}${p.desc}</div>
+            <div class="product-card__footer">
+              <span class="product-card__price">${formatPrice(p.price)}</span>
+              <button class="product-card__add" onclick="addToCart('${p.id}')" aria-label="Agregar ${p.name}" id="add-${p.id}">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ================================================
+       RENDERIZADO DE PROMOCIONES
+       ================================================ */
+    function renderPromos() {
+      const container = document.getElementById('promos-grid');
+      container.innerHTML = PROMOS.map(p => `
+        <div class="promo-card fade-in-up visible">
+          <div class="promo-card__img">
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
+              : `<div class="promo-card__img-placeholder">${p.emoji}</div>`
+            }
+          </div>
+          <div class="promo-card__body">
+            <span class="promo-card__tag">⭐ ${p.promoTag}</span>
+            <div class="promo-card__name">${p.name}</div>
+            <div class="promo-card__desc">${p.items} · ${p.desc}</div>
+            <div class="promo-card__footer">
+              <div class="promo-card__prices">
+                <span class="promo-card__old-price">${formatPrice(p.oldPrice)}</span>
+                <span class="promo-card__price">${formatPrice(p.price)}</span>
+              </div>
+              <button class="product-card__add" onclick="addToCart('${p.id}', true)" aria-label="Agregar ${p.name}">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ================================================
+       LÓGICA DEL CARRITO
+       ================================================ */
+    function addToCart(id, isPromo) {
+      const source = isPromo ? PROMOS : MENU;
+      const product = source.find(p => p.id === id);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      animateCartIcon();
+      showToast(`${product.name} agregado al carrito`);
+
+      const btn = document.getElementById('add-' + id);
+      if (btn) {
+        btn.classList.add('added');
+        btn.textContent = '✓';
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.textContent = '+';
+        }, 800);
+      }
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    function updateQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        removeFromCart(id);
+        return;
+      }
+      updateCartUI();
+    }
+
+    function getSubtotal() {
+      return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    }
+
+    function getTotal() {
+      const sub = getSubtotal();
+      return deliveryType === 'delivery' ? sub + DELIVERY_COST : sub;
+    }
+
+    const EMPTY_CART_HTML = `
+      <div class="cart__empty">
+        <div class="cart__empty-icon">🍣</div>
+        <p>Tu carrito está vacío</p>
+        <p style="font-size:0.8rem;margin-top:8px;">Agrega productos desde el menú</p>
+      </div>`;
+
+    function updateCartUI() {
+      const countEl = document.getElementById('cart-count');
+      const itemsEl = document.getElementById('cart-items');
+      const footerEl = document.getElementById('cart-footer');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+      const deliveryCostRow = document.getElementById('delivery-cost-row');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      countEl.textContent = totalItems;
+      countEl.classList.toggle('active', totalItems > 0);
+
+      if (cart.length === 0) {
+        footerEl.style.display = 'none';
+        itemsEl.innerHTML = EMPTY_CART_HTML;
+        return;
+      }
+
+      footerEl.style.display = 'block';
+
+      itemsEl.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item__info">
+            <div class="cart-item__name">${item.name}</div>
+            <div class="cart-item__price">${formatPrice(item.price * item.qty)}</div>
+            <div class="cart-item__controls">
+              <button class="cart-item__qty-btn" onclick="updateQty('${item.id}', -1)">−</button>
+              <span class="cart-item__qty">${item.qty}</span>
+              <button class="cart-item__qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item__remove" onclick="removeFromCart('${item.id}')" aria-label="Eliminar ${item.name}">🗑</button>
+        </div>
+      `).join('');
+
+      subtotalEl.textContent = formatPrice(getSubtotal());
+      deliveryCostRow.style.display = deliveryType === 'delivery' ? 'flex' : 'none';
+      totalEl.textContent = formatPrice(getTotal());
+    }
+
+    function animateCartIcon() {
+      const countEl = document.getElementById('cart-count');
+      countEl.classList.remove('bounce');
+      void countEl.offsetWidth;
+      countEl.classList.add('bounce');
+    }
+
+    function setDeliveryType(type) {
+      deliveryType = type;
+      document.querySelectorAll('.cart__delivery-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.type === type);
+      });
+      const addressField = document.getElementById('field-address');
+      addressField.style.display = type === 'delivery' ? 'block' : 'none';
+      updateCartUI();
+    }
+
+    /* ================================================
+       TOGGLE CARRITO Y MENÚ MÓVIL
+       ================================================ */
+    function toggleCart() {
+      const overlay = document.getElementById('cart-overlay');
+      const panel = document.getElementById('cart-panel');
+      const isOpen = panel.classList.contains('open');
+
+      overlay.classList.toggle('open', !isOpen);
+      panel.classList.toggle('open', !isOpen);
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      const toggle = document.getElementById('menu-toggle');
+      const isOpen = nav.classList.contains('open');
+      nav.classList.toggle('open', !isOpen);
+      toggle.textContent = isOpen ? '☰' : '✕';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('nav');
+      const toggle = document.getElementById('menu-toggle');
+      nav.classList.remove('open');
+      toggle.textContent = '☰';
+    }
+
+    /* ================================================
+       ENVÍO POR WHATSAPP
+       ================================================ */
+    function sendWhatsApp() {
+      if (cart.length === 0) {
+        showToast('Agrega productos al carrito primero');
+        return;
+      }
+
+      const nameField = document.getElementById('field-name');
+      const addressField = document.getElementById('field-address');
+      const name = document.getElementById('client-name').value.trim();
+      const address = document.getElementById('client-address').value.trim();
+      const comments = document.getElementById('client-comments').value.trim();
+
+      let hasError = false;
+
+      nameField.classList.remove('error');
+      addressField.classList.remove('error');
+
+      if (!name) {
+        nameField.classList.add('error');
+        hasError = true;
+      }
+      if (deliveryType === 'delivery' && !address) {
+        addressField.classList.add('error');
+        hasError = true;
+      }
+
+      if (hasError) {
+        showToast('Completa los campos requeridos');
+        return;
+      }
+
+      const subtotal = getSubtotal();
+      const deliveryCost = deliveryType === 'delivery' ? DELIVERY_COST : 0;
+      const total = subtotal + deliveryCost;
+
+      let msg = '🍣 *NUEVO PEDIDO - Sushi Kai*\n\n';
+      msg += '*Productos:*\n';
+      cart.forEach(item => {
+        msg += `• ${item.qty}x ${item.name}`;
+        if (item.pieces) msg += ` (${item.pieces})`;
+        msg += ` - ${formatPrice(item.price * item.qty)}\n`;
+      });
+      msg += `\n*Subtotal:* ${formatPrice(subtotal)}\n`;
+      if (deliveryType === 'delivery') {
+        msg += `*Delivery:* ${formatPrice(deliveryCost)}\n`;
+      }
+      msg += `*TOTAL:* ${formatPrice(total)}\n\n`;
+      msg += `*Tipo de entrega:* ${deliveryType === 'delivery' ? 'Delivery' : 'Retiro en local'}\n`;
+      msg += `*Nombre:* ${name}\n`;
+      if (deliveryType === 'delivery') {
+        msg += `*Dirección:* ${address}\n`;
+      }
+      if (comments) {
+        msg += `*Comentarios:* ${comments}\n`;
+      }
+
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    /* ================================================
+       WHATSAPP FLOTANTE
+       ================================================ */
+    function updateWhatsAppFloat() {
+      const el = document.getElementById('whatsapp-float');
+      el.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero hacer un pedido 🍣')}`;
+    }
+
+    /* ================================================
+       SCROLL ANIMATIONS (Intersection Observer)
+       ================================================ */
+    function initScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-in-up').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    /* ================================================
+       INICIALIZACIÓN
+       ================================================ */
+    function init() {
+      renderTabs();
+      renderProducts();
+      renderPromos();
+      updateWhatsAppFloat();
+      initScrollAnimations();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
