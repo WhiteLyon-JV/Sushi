@@ -2125,7 +2125,10 @@
       msg += '*Productos:*\n';
       cart.forEach(item => {
         msg += `• ${item.qty}x ${item.name}`;
-        if (item.pieces) msg += ` (${item.pieces})`;
+        if (item.pieces) {
+          const num = parseInt(item.pieces);
+          msg += num ? ` (${num * item.qty} piezas)` : ` (${item.pieces})`;
+        }
         msg += ` - ${formatPrice(item.price * item.qty)}\n`;
       });
       msg += `\n*Subtotal:* ${formatPrice(subtotal)}\n`;
