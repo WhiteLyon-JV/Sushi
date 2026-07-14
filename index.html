@@ -481,6 +481,14 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       margin-top: -6px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .menu-grid.compact .product-card.expanded .product-card__desc {
+      -webkit-line-clamp: none !important;
+      -webkit-box-orient: horizontal !important;
+      display: block !important;
+      overflow: visible !important;
     }
     .menu-grid.compact .product-card__footer {
       margin-left: auto;
@@ -1831,6 +1839,11 @@
       renderProducts();
     }
 
+    function toggleDesc(card, e) {
+      if (e.target.closest('button')) return;
+      card.classList.toggle('expanded');
+    }
+
     function setMenuView(view) {
       menuView = view;
       document.getElementById('view-grid').classList.toggle('active', view === 'grid');
@@ -1861,7 +1874,7 @@
       container.classList.toggle('compact', menuView === 'compact');
 
       container.innerHTML = filtered.map(p => `
-        <div class="product-card fade-in-up visible">
+        <div class="product-card fade-in-up visible" onclick="toggleDesc(this, event)">
           <div class="product-card__img">
             ${p.img
               ? `<img src="${p.img}" alt="${p.name}" loading="lazy">`
