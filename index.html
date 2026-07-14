@@ -1939,8 +1939,10 @@
     }
 
     function removeFromCart(id) {
+      const isPromo = PROMOS.some(p => p.id === id);
       cart = cart.filter(item => item.id !== id);
       updateCartUI();
+      updateCardQty(id, isPromo);
     }
 
     function updateQty(id, delta) {
@@ -1952,6 +1954,7 @@
         return;
       }
       updateCartUI();
+      updateCardQty(id, PROMOS.some(p => p.id === id));
     }
 
     function getSubtotal() {
