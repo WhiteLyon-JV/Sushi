@@ -463,13 +463,24 @@
       flex-direction: row;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
     }
     .menu-grid.compact .product-card__name {
       font-size: 0.95rem;
       margin-bottom: 0;
+      flex: 1;
+      min-width: 0;
     }
     .menu-grid.compact .product-card__desc {
-      display: none;
+      font-size: 0.78rem;
+      line-height: 1.3;
+      color: var(--color-text-muted);
+      flex-basis: 100%;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: -6px;
     }
     .menu-grid.compact .product-card__footer {
       margin-left: auto;
@@ -1541,7 +1552,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    /* ================================================
+    /* ==========================  ======================
        CONFIGURACIÓN - NÚMERO DE WHATSAPP
        ================================================
        REEMPLAZAR: Cambia este número por el del local.
